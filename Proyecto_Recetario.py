@@ -2,7 +2,11 @@ from pathlib import Path
 import os
 from os import system
 
-ruta = os.chdir("C:\Users\Luis\Recetas")
+def contador_recetas(ruta):
+    contador = 0
+    for txt in Path(ruta).glob("**/*.txt"):
+        contador += 1
+    return contador
 
 def Tabla():
     print("1- leer recta")
@@ -13,18 +17,15 @@ def Tabla():
     print("6- finalizar programa")
 
 def leer_receta():
+    print("leer recta")
     #mostrar categoria
     #elegir categoria
     #Mostrar recetas
     #Elegir receta
     #leer receta
 
-    print("Que categoria quieres: Carnes\n Ensaladas\nPastas\n, Postres\n")
-    categoria = input()
-    guia = Path(Path.home(),"Recetas",categoria)
-    print("Las recetas son )
-
 def crear_receta():
+    print("crear receta")
     # mostrar categoria
     # elegir categoria
     # crear receta nueva
@@ -32,9 +33,11 @@ def crear_receta():
 def crear_categoria():
     #Crear categoria
     nombre_categoria = input("Elige un nombre para una nueva categoria: ")
-    ruta = os.makedirs("C:\Users\Luis\Recetas",nombre_categoria)
+    ruta_base = r"C:\Users\Luis\Recetas"
+    ruta_categoria = os.path.join(ruta_base, nombre_categoria)
 
 def eliminar_receta():
+    print("eliminar receta")
     # mostrar categoria
     # elegir categoria
     # Mostrar recetas
@@ -42,24 +45,19 @@ def eliminar_receta():
     # Eliminar receta
 
 def Eliminar_categoria():
+    print("eliminar categoria")
     # mostrar categoria
     # elegir categoria
     # eliminar categoria
 
 while True:
     system("cls")
+    print("=" * 47 )
     print("Bienvenido a mi recetario")
-
-    base = Path.home()
-    print(f"Las recetas están en {base}")
-
-    guia = base / "Recetas"
-    contador = 0
-
-    for txt in guia.glob("*.txt"):
-        contador += 1
-
-    print(f"Tienes {contador} recetas")
+    print("=" * 47)
+    mi_ruta = Path(Path.home(),"Recetas")
+    print(f"Las recetas están en {mi_ruta}")
+    print(f"Total de recetas en {contador_recetas(mi_ruta)}")
 
     Tabla()
     entrada = int(input("Elige una opcion: "))
